@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import RequestReviewDeck from "./components/RequestReviewDeck";
+import CalmBreathingCanvas from "./components/CalmBreathingCanvas";
 import { Sparkles, Calendar, Plus, RefreshCw, Layers } from "lucide-react";
 
 const INITIAL_REQUESTS = [
@@ -58,6 +59,8 @@ export default function App() {
     const req = requests.find((r) => r.id === id);
     if (req) {
       addLog(`APPROVED: ${req.patientName} (${req.type}) at ${req.time}`, "success");
+      // Remove from stack
+      setRequests((prev) => prev.filter((r) => r.id !== id));
     }
   };
 
@@ -65,6 +68,8 @@ export default function App() {
     const req = requests.find((r) => r.id === id);
     if (req) {
       addLog(`REJECTED: ${req.patientName} (${req.type}) - Reason: "${reason}"`, "error");
+      // Remove from stack
+      setRequests((prev) => prev.filter((r) => r.id !== id));
     }
   };
 
@@ -102,6 +107,11 @@ export default function App() {
     addLog(`INCOMING REQUEST: ${newRequest.patientName} inserted at top of stack.`, "incoming");
   };
 
+  // If stack is completely empty, display the relaxing Calm UI empty state canvas
+  if (requests.length === 0) {
+    return <CalmBreathingCanvas onSimulate={handleAddNew} />;
+  }
+
   return (
     <div className="min-h-screen bg-gray-50/30 flex flex-col items-center justify-start p-6 md:p-12 overflow-x-hidden">
       
@@ -120,7 +130,7 @@ export default function App() {
         <div className="flex items-center gap-3">
           <button
             onClick={handleAddNew}
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-bold bg-violet-600 text-white rounded-xl hover:bg-violet-700 shadow-md shadow-violet-600/10 active:scale-95 transition-all duration-200"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-bold bg-violet-600 text-white rounded-xl hover:bg-violet-700 shadow-md shadow-violet-600/10 active:scale-95 transition-all duration-200 cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Simulate New Request
@@ -128,7 +138,7 @@ export default function App() {
           
           <button
             onClick={handleReload}
-            className="flex items-center gap-1.5 px-3 py-2 text-sm font-bold bg-white text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50 shadow-sm active:scale-95 transition-all duration-200"
+            className="flex items-center gap-1.5 px-3 py-2 text-sm font-bold bg-white text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50 shadow-sm active:scale-95 transition-all duration-200 cursor-pointer"
           >
             <RefreshCw className="w-4 h-4" />
             Reload Stack

@@ -1,5 +1,50 @@
 @import "tailwindcss";
 
+@theme {
+  --animate-breathe-primary: breathe-primary 10s ease-in-out infinite;
+  --animate-breathe-secondary: breathe-secondary 10s ease-in-out infinite;
+  --animate-fade-in-title: fade-in-title 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in-subtitle: fade-in-subtitle 3.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in-ui: fade-in-ui 4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes breathe-primary {
+    0%, 100% {
+      transform: scale(0.85) translate(0px, 0px);
+      opacity: 0.3;
+    }
+    45%, 55% {
+      transform: scale(1.15) translate(20px, -15px);
+      opacity: 0.85;
+    }
+  }
+
+  @keyframes breathe-secondary {
+    0%, 100% {
+      transform: scale(0.9) translate(0px, 0px) rotate(0deg);
+      opacity: 0.2;
+    }
+    45%, 55% {
+      transform: scale(1.22) translate(-20px, 20px) rotate(12deg);
+      opacity: 0.65;
+    }
+  }
+
+  @keyframes fade-in-title {
+    0% { opacity: 0; transform: translateY(16px); filter: blur(6px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  }
+
+  @keyframes fade-in-subtitle {
+    0%, 40% { opacity: 0; transform: translateY(12px); filter: blur(6px); }
+    100% { opacity: 0.65; transform: translateY(0); filter: blur(0px); }
+  }
+
+  @keyframes fade-in-ui {
+    0%, 60% { opacity: 0; filter: blur(4px); }
+    100% { opacity: 1; filter: blur(0px); }
+  }
+}
+
 @layer base {
   body {
     background-color: #fcfcfc;
