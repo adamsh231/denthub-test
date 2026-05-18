@@ -31,3 +31,4 @@ lerna-debug.log*
 
 # Mission Control Internal
 .mc-workspace.json
+.workspaces
