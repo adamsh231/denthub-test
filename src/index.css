@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom Spring Animation Ease Curves */
+  --transition-timing-function-spring-gentle: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  --transition-timing-function-spring-bouncy: cubic-bezier(0.43, 0.93, 0.44, 1.48);
+  --transition-timing-function-spring-snappy: cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-timing-function-spring-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Animation definitions using native v4 utility directives */
+  --animate-spring-in: spring-in 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+}
+
+@keyframes spring-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Custom baseline styling matching Filosofi Desain */
+:root {
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --bg-primary: #f8fafc;
+  --border-subtle: rgba(226, 232, 240, 0.4);
+  --card-shadow-active: 0 12px 30px -10px rgba(0, 0, 0, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --bg-primary: #090d16;
+    --border-subtle: rgba(30, 41, 59, 0.4);
+    --card-shadow-active: 0 12px 30px -10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base custom classes to support DentHub's invisible/motion-first UI */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid var(--border-subtle);
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass-panel {
+    background: rgba(13, 20, 35, 0.6);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-subtle);
+  }
+}
