@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import RequestReviewDeck from "./components/RequestReviewDeck";
 import CalmBreathingCanvas from "./components/CalmBreathingCanvas";
+import WeeklyOverviewRibbon from "./components/WeeklyOverviewRibbon";
 import { Sparkles, Calendar, Plus, RefreshCw, Layers } from "lucide-react";
 
 const INITIAL_REQUESTS = [
@@ -145,6 +146,9 @@ export default function App() {
           </button>
         </div>
       </header>
+
+      {/* SECONDARY LAYER: WEEKLY CALENDAR OVERVIEW RIBBON */}
+      <WeeklyOverviewRibbon onLogAction={(msg) => addLog(msg, "info")} />
 
       {/* CORE WORKFLOW AREA */}
       <main className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
