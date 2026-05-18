@@ -91,9 +91,6 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
   };
 
   const rejectAppointment = (id: string, reason: string) => {
-    // Keep a record of the rejection/notes and delete/mark complete or remove from active timeline
-    // For a smooth flow, we will transition it out or shrink it. Let's filter it out or mark status.
-    // For simplicity, let's update treatment or notes with rejection reason, then change status or delete
     setAppointments((prev) =>
       prev.map((app) =>
         app.id === id

@@ -1,11 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useDashboard } from '../context/DashboardContext';
 import type { Appointment } from '../types';
-import { X, Check, FileText, ChevronRight, Sparkles } from 'lucide-react';
-import { useVisitNotesStore } from '../store/visitNotesStore';
-import { SuggestionPills } from './SuggestionPills';
-import { insertTextAtCursor } from '../utils/cursorHelper';
+import { X, Check } from 'lucide-react';
 
 interface PatientDetailProps {
   appointment: Appointment;
@@ -13,29 +10,11 @@ interface PatientDetailProps {
 
 export const PatientDetail: React.FC<PatientDetailProps> = ({ appointment }) => {
   const { setActiveAppointmentId, updateAppointment } = useDashboard();
-  
-  // Connect local state and matcher actions to local Zustand store
-  const {
-    diagnosis,
-    treatment,
-    notes,
-    setDiagnosis,
-    setTreatment,
-    setNotes,
-    setDiagnosisFocused,
-    initFromAppointment
-  } = useVisitNotesStore();
-
+  const [diagnosis, setDiagnosis] = useState(appointment.diagnosis || '');
+  const [treatment, setTreatment] = useState(appointment.treatment || '');
+  const [notes, setNotes] = useState(appointment.notes || '');
   const [isSaving, setIsSaving] = useState(false);
   const [showSavedDot, setShowSavedDot] = useState(false);
-
-  // References to input/textarea elements for cursor-aware insertions
-  const treatmentInputRef = useRef<HTMLInputElement>(null);
-
-  // Sync / initialize store state when active appointment changes
-  useEffect(() => {
-    initFromAppointment(appointment);
-  }, [appointment, initFromAppointment]);
 
   const handleSave = () => {
     setIsSaving(true);
@@ -56,21 +35,6 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({ appointment }) => 
         setActiveAppointmentId(null);
       }, 1000);
     }, 800);
-  };
-
-  // Cursor-aware insertion on suggestion click
-  const handleSelectSuggestion = (suggestion: any) => {
-    const input = treatmentInputRef.current;
-    if (!input) return;
-
-    const { newValue, nextCursorPos } = insertTextAtCursor(input, suggestion.text, treatment);
-    setTreatment(newValue);
-
-    // Schedule cursor focus restoration after React finishes DOM batch updates
-    requestAnimationFrame(() => {
-      input.focus();
-      input.setSelectionRange(nextCursorPos, nextCursorPos);
-    });
   };
 
   return (
@@ -141,7 +105,7 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({ appointment }) => 
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1">
-                <FileText size={12} /> Diagnosis
+                Diagnosis
               </label>
               {showSavedDot && (
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
@@ -150,14 +114,10 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({ appointment }) => 
             <textarea
               value={diagnosis}
               onChange={(e) => setDiagnosis(e.target.value)}
-              onFocus={() => setDiagnosisFocused(true)}
-              onBlur={() => setDiagnosisFocused(false)}
-              placeholder="Masukkan diagnosis klinis gigi (e.g. Pulpitis irreversible gigi 36)..."
+              placeholder="Masukkan diagnosis klinis gigi (e.g. Pulpitis reversible gigi 36)..."
               rows={2}
-              className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 transition-all duration-300 resize-none animate-focus"
+              className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 transition-all duration-300 resize-none"
             />
-            {/* Intelligent suggestion pills that render beneath diagnosis and populate Treatment */}
-            <SuggestionPills onSelectSuggestion={handleSelectSuggestion} />
           </div>
 
           <div>
@@ -165,7 +125,6 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({ appointment }) => 
               Tindakan (Treatment)
             </label>
             <input
-              ref={treatmentInputRef}
               type="text"
               value={treatment}
               onChange={(e) => setTreatment(e.target.value)}
@@ -217,7 +176,6 @@ export const PatientDetail: React.FC<PatientDetailProps> = ({ appointment }) => 
                 </>
               ) : (
                 <>
-                  <Sparkles size={16} className="text-amber-500" />
                   Simpan Catatan
                 </>
               )}

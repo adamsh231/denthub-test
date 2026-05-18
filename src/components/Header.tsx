@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useDashboard } from '../context/DashboardContext';
-import type { Appointment } from '../types';
-import { Calendar, Clock, Smile, AlertCircle, CheckCircle, ShieldAlert, ChevronDown, Check, X, RotateCcw } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const { appointments } = useDashboard();
