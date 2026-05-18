@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDashboard } from '../context/DashboardContext';
-import { ChevronDown, Calendar, ToggleLeft, ToggleRight } from 'lucide-react';
+import { ChevronDown, Calendar } from 'lucide-react';
 
 export const WeeklyOverview: React.FC = () => {
   const { isWeeklyOverviewExpanded, setIsWeeklyOverviewExpanded } = useDashboard();

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDashboard } from '../context/DashboardContext';
-import type { Appointment } from '../types';
-import { Check, X, MessageSquare, ShieldAlert, Sparkles } from 'lucide-react';
+import { X, Check } from 'lucide-react';
 
 export const RequestReview: React.FC = () => {
   const { appointments, approveAppointment, rejectAppointment } = useDashboard();
@@ -37,7 +36,6 @@ export const RequestReview: React.FC = () => {
   return (
     <div className="w-full px-6 md:px-12 py-6">
       <div className="flex items-center gap-2 mb-4 px-1">
-        <Sparkles size={16} className="text-amber-500 animate-pulse" />
         <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
           Tinjauan Permintaan Sesi ({requestedAppointments.length})
         </h3>

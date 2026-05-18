@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDashboard } from '../context/DashboardContext';
-import type { Appointment, TimelineFilter } from '../types';
 import { PatientDetail } from './PatientDetail';
-import { Clock, ChevronRight, Activity, Smile, RefreshCw } from 'lucide-react';
+import { Clock, ChevronRight, Activity, Smile } from 'lucide-react';
+import type { TimelineFilter } from '../types';
 
 export const AppointmentTimeline: React.FC = () => {
   const { appointments, activeAppointmentId, setActiveAppointmentId } = useDashboard();

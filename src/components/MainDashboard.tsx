@@ -6,10 +6,10 @@ import { Header } from './Header';
 import { WeeklyOverview } from './WeeklyOverview';
 import { RequestReview } from './RequestReview';
 import { AppointmentTimeline } from './AppointmentTimeline';
-import { Calendar, Plus, Battery, BatteryCharging, Sparkles, Smile, ShieldAlert } from 'lucide-react';
+import { Plus, Battery, BatteryCharging, Sparkles } from 'lucide-react';
 
 export const MainDashboard: React.FC = () => {
-  const { appointments, addAppointment } = useDashboard();
+  const { addAppointment } = useDashboard();
   const { batteryLevel, isCharging } = useBatteryStatus();
   
   const [showAddForm, setShowAddForm] = useState(false);
@@ -28,7 +28,7 @@ export const MainDashboard: React.FC = () => {
       time: newTime,
       patientName: newPatientName,
       complaint: newComplaint,
-      status: 'REQUESTED', // Default as a request review card
+      status: 'REQUESTED',
       age: Number(newAge),
       gender: newGender,
       phone: newPhone,
