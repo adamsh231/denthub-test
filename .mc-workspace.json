@@ -1,0 +1,12 @@
+{
+  "taskId": "d496b3a7-1ee8-486e-9dbb-85b41089f7ae",
+  "productId": "a75ec1c1-e384-4bc1-ae6f-e12acfb1df7c",
+  "createdAt": "2026-05-18T07:07:50.264Z",
+  "strategy": "worktree",
+  "branch": "autopilot/horizontal-weekly-overview-ribbon-with-accordion-u",
+  "baseBranch": "master",
+  "baseCommit": "ae30f5add6603da76863da62d4bf9af71008f9ec",
+  "status": "active",
+  "agentId": "39d3a1a4-08ed-4f98-ac4a-fae2314966a4",
+  "isolatedPort": 4203
+}
