@@ -9,7 +9,7 @@ interface SuggestionPillsProps {
 }
 
 export const SuggestionPills: React.FC<SuggestionPillsProps> = ({ onSelectSuggestion }) => {
-  const { suggestions, isDiagnosisFocused } = useVisitNotesStore();
+  const { suggestions } = useVisitNotesStore();
 
   // Non-intrusive container shown only when there are suggestions
   return (
